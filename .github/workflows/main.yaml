@@ -24,7 +24,7 @@ jobs:
   health-check-job: # health check job for testing and code formatting check
     runs-on: ubuntu-latest # os for running the job
     services:
-      postgresDB: # we need a postgres docker image to be booted a side car service to run the tests that needs a db
+      postgres: # we need a postgres docker image to be booted a side car service to run the tests that needs a db
         image: postgres:latest
         env: # the environment variable must match with shipmentTracker/settings.py if block of DATBASES variable otherwise test will fail due to connectivity issue.
           POSTGRES_USER: ${{ secrets.DATABASE_USER }}
@@ -56,7 +56,7 @@ jobs:
         run: python --version
 
       - name: Install requirements # install application requirements
-        run: pip install -r requirements.txt
+        run: pip install -r shipmentTracker/requirements.txt
 
       - name: Run Migrations # run migrations to create table in side car db container
         run: |
