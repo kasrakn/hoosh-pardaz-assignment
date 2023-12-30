@@ -26,7 +26,7 @@ jobs:
     services:
       postgresDB: # we need a postgres docker image to be booted a side car service to run the tests that needs a db
         image: postgres:latest
-        env: # the environment variable must match with shipmentTrancker/settings.py if block of DATBASES variable otherwise test will fail due to connectivity issue.
+        env: # the environment variable must match with shipmentTracker/settings.py if block of DATBASES variable otherwise test will fail due to connectivity issue.
           POSTGRES_USER: ${{ secrets.DATABASE_USER }}
           POSTGRES_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
           POSTGRES_DB: ${{ secrets.DATABASE_NAME }}
@@ -60,7 +60,7 @@ jobs:
 
       - name: Run Migrations # run migrations to create table in side car db container
         run: |
-          python shipmentTrancker/manage.py migrate
+          python shipmentTracker/manage.py migrate
 
       - name: Run Test # running tests
         env:
@@ -72,7 +72,7 @@ jobs:
           DATABASE_HOST: localhost
           DATABASE_PORT: 5432
         run: |
-          python shipmentTrancker/manage.py test shipmentTrancker
+          python shipmentTracker/manage.py test shipmentTracker
 
 
   build-and-push-image-job:
@@ -102,7 +102,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
         with:
-          context: ./shipmentTrancker
+          context: ./shipmentTracker
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
