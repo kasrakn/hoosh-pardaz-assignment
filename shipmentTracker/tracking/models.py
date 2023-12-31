@@ -1,7 +1,7 @@
 from django.db import models
 
 
-class Shipment(models.Model):
+class ShipmentModel(models.Model):
     IN_TRANSIT = "IT"
     INBOUND_SCAN = "IN"
     DELIVERY = "DL"
@@ -43,3 +43,8 @@ class Shipment(models.Model):
         choices=STATUS_CHOICES, 
         default=IN_TRANSIT
         )
+
+class WeatherModel(models.Model):
+    zip_city = models.CharField(max_length=255)
+    temprature = models.FloatField()
+    description = models.CharField(max_length=20)
