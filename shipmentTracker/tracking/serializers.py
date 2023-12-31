@@ -5,3 +5,8 @@ class ShipmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Shipment
         fields = "__all__"
+
+
+class ShipmentStatusSerializer(serializers.Serializer):
+    tracking_number = serializers.CharField()
+    carrier = serializers.CharField()
