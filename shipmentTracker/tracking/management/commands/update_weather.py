@@ -8,7 +8,6 @@ class Command(BaseCommand):
     help = 'Update weather information for all zip codes'
 
     def handle(self, *args, **kwargs):
-        zipcodes = WeatherModel.objects.values_list('zipcode', flat=True)
 
         # A set to store cities
         city_set = set()
@@ -33,8 +32,14 @@ class Command(BaseCommand):
 
             # Conver the response data to json
             json_data = json.loads(response.content)
+            temprature = json_data['current']['temp_c']
+            description = json_data['current']['condition']['text']
+
             weather_object, created = WeatherModel.objects.get_or_create(
                 zip_city=city
             )
-            weather_object.temprature = json_data['current']['temp_c']
-            weather_object.description = json_data['current']['condition']['text']
+            weather_object.temprature = float(temprature)
+            weather_object.description = description
+            weather_object.save()
+
+

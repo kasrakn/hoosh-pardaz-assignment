@@ -46,5 +46,5 @@ class ShipmentModel(models.Model):
 
 class WeatherModel(models.Model):
     zip_city = models.CharField(max_length=255)
-    temprature = models.FloatField()
-    description = models.CharField(max_length=20)
+    temprature = models.FloatField(null=True)
+    description = models.CharField(max_length=20, null=True)

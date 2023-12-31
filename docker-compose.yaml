@@ -53,6 +53,8 @@ services:
       - DATABASE_PORT=${DATABASE_PORT}
       - DATABASE_HOST=${DATABASE_HOST}
       - REDIS_HOST=redis
+      - WEATHER_API_KEY=${WEATHER_API_KEY}
+
     depends_on:
       - redis
 
@@ -71,6 +73,7 @@ services:
       - DATABASE_PORT=${DATABASE_PORT}
       - DATABASE_HOST=${DATABASE_HOST}
       - REDIS_HOST=redis
+      - WEATHER_API_KEY=${WEATHER_API_KEY}
     depends_on:
       - redis
 
