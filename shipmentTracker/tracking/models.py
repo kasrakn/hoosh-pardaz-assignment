@@ -1,5 +1,18 @@
 from django.db import models
 
+class WeatherModel(models.Model):
+    zip_city = models.CharField(max_length=255)
+    temprature = models.FloatField(null=True)
+    description = models.CharField(max_length=20, null=True)
+
+    def __str__(self) -> str:
+        return f"{self.description} - {self.temprature}"
+    
+    @classmethod
+    def get_weather_for_address(self, receiver_address):
+        zip_city = receiver_address.split(',')[1].strip()
+        return self.objects.filter(zip_city=zip_city).first()
+
 
 class ShipmentModel(models.Model):
     IN_TRANSIT = "IT"
@@ -43,8 +56,3 @@ class ShipmentModel(models.Model):
         choices=STATUS_CHOICES, 
         default=IN_TRANSIT
         )
-
-class WeatherModel(models.Model):
-    zip_city = models.CharField(max_length=255)
-    temprature = models.FloatField(null=True)
-    description = models.CharField(max_length=20, null=True)

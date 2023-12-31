@@ -182,9 +182,7 @@ CELERY_TIMEZONE = 'UTC'
 CELERY_BEAT_SCHEDULE = {
     'update-weather-every-2-hours': {
         'task': 'tracking.tasks.update_weather',
-        'schedule': 2 * 60 * 60,  # 2 hours in seconds
-        # 'schedule': 2 * 60,  # 2 minutes in seconds
-
+        'schedule': 2 * 60 * 60 if DEBUG == False else 2 * 60
     },
 }
 
