@@ -86,7 +86,8 @@ class TestViews(TestCase):
                 "article_quantity": 20,
                 "article_price": 10000.0,
                 "sku": "",
-                "status": "DL"
+                "status": "DL",
+                'weather': None
             },
             {
                 "tracking_number": "TN9876543",
@@ -97,7 +98,8 @@ class TestViews(TestCase):
                 "article_quantity": 200,
                 "article_price": 100000.0,
                 "sku": "",
-                "status": "IT"
+                "status": "IT",
+                'weather': None
             },
             {
                 "tracking_number": "TN9876543",
@@ -108,7 +110,8 @@ class TestViews(TestCase):
                 "article_quantity": 40,
                 "article_price": 30.0,
                 "sku": "",
-                "status": "IT"
+                "status": "IT",
+                'weather': None
             }
         ]
 
