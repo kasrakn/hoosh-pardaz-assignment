@@ -1,4 +1,5 @@
 django
+requests
 
 # Postgres connector
 psycopg2-binary

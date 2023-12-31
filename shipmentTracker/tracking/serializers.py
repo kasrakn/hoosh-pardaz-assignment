@@ -1,9 +1,9 @@
 from rest_framework import serializers
-from .models import Shipment
+from .models import ShipmentModel
 
 class ShipmentSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Shipment
+        model = ShipmentModel
         fields = ['tracking_number', 'carrier', 'sender_address', 
                   'receiver_address', "article_name", 'article_quantity',
                     'article_price', 'sku', 'status'

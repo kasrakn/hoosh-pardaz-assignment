@@ -1,7 +1,7 @@
 from django.test import TestCase, SimpleTestCase, Client
 from django.urls import reverse, resolve, reverse_lazy
 from .views import ShipmentListView
-from .models import Shipment
+from .models import ShipmentModel
 
 import json
 # Create your tests here.
@@ -16,7 +16,7 @@ class TestUrls(SimpleTestCase):
 class TestModels(TestCase):
 
     def test_shipment_object_creation(self):
-        Shipment.objects.create(
+        ShipmentModel.objects.create(
             tracking_number='TN987654',
             carrier='test-carrier',
             sender_address='Street 2, Mashhad, Iran',
@@ -26,7 +26,7 @@ class TestModels(TestCase):
             article_price=10000,
             status='DL'
         )
-        Shipment.objects.create(
+        ShipmentModel.objects.create(
             tracking_number='TN9876543',
             carrier='test-carrier',
             sender_address='Street 3, Mashhad, Iran',
@@ -37,7 +37,7 @@ class TestModels(TestCase):
             status='IT'
         )
 
-        self.assertEqual(Shipment.objects.count(), 2)
+        self.assertEqual(ShipmentModel.objects.count(), 2)
 
 
 class TestViews(TestCase):
@@ -46,7 +46,7 @@ class TestViews(TestCase):
         client = Client()
 
     def test_shipment_list_GET(self):
-        ship1 = Shipment.objects.create(
+        ship1 = ShipmentModel.objects.create(
             tracking_number='TN987654',
             carrier='test-carrier',
             sender_address='Street 2, Mashhad, Iran',
@@ -56,7 +56,7 @@ class TestViews(TestCase):
             article_price=10000,
             status='DL'
         )
-        ship2 = Shipment.objects.create(
+        ship2 = ShipmentModel.objects.create(
             tracking_number='TN9876543',
             carrier='test-carrier',
             sender_address='Street 3, Mashhad, Iran',
@@ -66,7 +66,7 @@ class TestViews(TestCase):
             article_price=100000,
             status='IT'
         )
-        ship3 = Shipment.objects.create(
+        ship3 = ShipmentModel.objects.create(
             tracking_number='TN9876543',
             carrier='test-carrier',
             sender_address='Street 3, Mashhad, Iran',
@@ -131,7 +131,7 @@ class TestViews(TestCase):
 
     
     def test_shipment_list_POST(self):
-        ship1 = Shipment.objects.create(
+        ship1 = ShipmentModel.objects.create(
             tracking_number='TN987654',
             carrier='test-carrier',
             sender_address='Street 2, Mashhad, Iran',
@@ -141,7 +141,7 @@ class TestViews(TestCase):
             article_price=10000,
             status='DL'
         )
-        ship2 = Shipment.objects.create(
+        ship2 = ShipmentModel.objects.create(
             tracking_number='TN9876543',
             carrier='test-carrier',
             sender_address='Street 3, Mashhad, Iran',
@@ -151,7 +151,7 @@ class TestViews(TestCase):
             article_price=100000,
             status='IT'
         )
-        ship3 = Shipment.objects.create(
+        ship3 = ShipmentModel.objects.create(
             tracking_number='TN9876543',
             carrier='test-carrier',
             sender_address='Street 3, Mashhad, Iran',

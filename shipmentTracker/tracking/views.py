@@ -3,13 +3,13 @@ from django.views import View
 from django.http import JsonResponse, HttpResponseBadRequest, HttpResponseNotFound
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .models import Shipment
+from .models import ShipmentModel
 from .serializers import ShipmentSerializer, ShipmentStatusSerializer
 
 class ShipmentListView(APIView):
 
     def get(self, request):
-        queryset = Shipment.objects.all()
+        queryset = ShipmentModel.objects.all()
         serializer = ShipmentSerializer(queryset, many=True)
         return Response(serializer.data)
 
@@ -20,7 +20,7 @@ class ShipmentListView(APIView):
             carrier = serializer.validated_data['carrier']
 
             # Get the shipment objects with the given tracking number and carrier
-            queryset = Shipment.objects.filter(
+            queryset = ShipmentModel.objects.filter(
                 tracking_number=tracking_number, 
                 carrier=carrier
                 )

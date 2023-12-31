@@ -165,3 +165,23 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
 #     ]
 # }
+
+# Celery configurations
+REDIS_HOST = os.environ.get("REDIS_HOST") # redis host
+
+CELERY_BROKER_URL = 'redis://REDIS_HOST:6379'
+CELERY_RESULT_BACKEND = 'redis://REDIS_HOST:6379'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'UTC'
+
+CELERY_BEAT_SCHEDULE = {
+    'update-weather-every-2-hours': {
+        'task': 'tracking.tasks.update_weather',
+        'schedule': 2 * 60 * 60,  # 2 hours in seconds
+    },
+}
+
+
+WEATHER_API_KEY = os.getenv("WEATHER_API_KEY")

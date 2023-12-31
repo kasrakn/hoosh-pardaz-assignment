@@ -1,7 +1,7 @@
 from typing import Any
 import csv
 from django.core.management.base import BaseCommand
-from tracking.models import Shipment
+from tracking.models import ShipmentModel
 
 class Command(BaseCommand):
     help = 'Populate the database with the initial data'
@@ -16,7 +16,7 @@ class Command(BaseCommand):
                 if line_count != 0:
 
                     # Create model objects with the data
-                    Shipment.objects.create(
+                    ShipmentModel.objects.create(
                         tracking_number=row[0],
                         carrier=row[1],
                         sender_address=row[2],
