@@ -2,10 +2,9 @@ from django.contrib import admin
 from tracking.models import ShipmentModel, WeatherModel
 
 class ShipmentAdmin(admin.ModelAdmin):
-    list_display = '__all__'
-
+    pass
 class WeatherAdmin(admin.ModelAdmin):
-    list_display = '__all__'
+    pass
 
 
 admin.site.register(ShipmentModel, ShipmentAdmin)

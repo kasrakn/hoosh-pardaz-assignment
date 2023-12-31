@@ -152,6 +152,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = 'shipmentTracker/static/'
+# STATICFILES_DIRS = [BASE_DIR / 'static']
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -180,6 +183,8 @@ CELERY_BEAT_SCHEDULE = {
     'update-weather-every-2-hours': {
         'task': 'tracking.tasks.update_weather',
         'schedule': 2 * 60 * 60,  # 2 hours in seconds
+        # 'schedule': 2 * 60,  # 2 minutes in seconds
+
     },
 }
 

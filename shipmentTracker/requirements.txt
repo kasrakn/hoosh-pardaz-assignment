@@ -18,3 +18,5 @@ django-filter
 
 # Handling .env files
 python-dotenv
+
+redis
