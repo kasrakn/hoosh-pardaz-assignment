@@ -1,0 +1,81 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:latest
+    environment:
+      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+      - POSTGRES_DB=${DATABASE_NAME}
+      - POSTGRES_USER=${DATABASE_USER}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    restart: always
+    ports:
+      - 5432:${DATABASE_PORT}
+
+  web-app:
+    build:
+      context: ./shipmentTracker
+    command: gunicorn --bind 0.0.0.0:8000 shipmentTracker.wsgi
+    environment:
+      - DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
+      - DJANGO_DEBUG=${DJANGO_DEBUG}
+      - DJANGO_ALLOWED_HOST=${DJANGO_ALLOWED_HOST}
+      - DATABASE_USER=${DATABASE_USER}
+      - DATABASE_PASSWORD=${DATABASE_PASSWORD}
+      - DATABASE_NAME=${DATABASE_NAME}
+      - DATABASE_PORT=${DATABASE_PORT}
+      - DATABASE_HOST=postgres
+      - WEATHER_API_KEY=${WEATHER_API_KEY}
+      - REDIS_HOST=redis
+    volumes:
+      - ./shipmentTracker:/app
+    ports:
+      - 80:8000
+    depends_on:
+      - postgres
+  
+  redis:
+    image: redis:latest
+
+  celery:
+    build: ./shipmentTracker
+    command: celery -A shipmentTracker worker -l info
+    volumes:
+      - ./shipmentTracker:/app/
+    environment:
+      - DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
+      - DJANGO_DEBUG=${DJANGO_DEBUG}
+      - DJANGO_ALLOWED_HOST=${DJANGO_ALLOWED_HOST}
+      - DATABASE_NAME=${DATABASE_NAME}
+      - DATABASE_USER=${DATABASE_USER}
+      - DATABASE_PASSWORD=${DATABASE_PASSWORD}
+      - DATABASE_PORT=${DATABASE_PORT}
+      - DATABASE_HOST=${DATABASE_HOST}
+      - REDIS_HOST=redis
+      - WEATHER_API_KEY=${WEATHER_API_KEY}
+
+    depends_on:
+      - redis
+
+  celery-beat:
+    build: ./shipmentTracker
+    command: celery -A shipmentTracker beat -l info
+    volumes:
+      - ./shipmentTracker:/app/
+    environment:
+      - DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
+      - DJANGO_DEBUG=${DJANGO_DEBUG}
+      - DJANGO_ALLOWED_HOST=${DJANGO_ALLOWED_HOST}
+      - DATABASE_USER=${DATABASE_USER}
+      - DATABASE_PASSWORD=${DATABASE_PASSWORD}
+      - DATABASE_NAME=${DATABASE_NAME}
+      - DATABASE_PORT=${DATABASE_PORT}
+      - DATABASE_HOST=${DATABASE_HOST}
+      - REDIS_HOST=redis
+      - WEATHER_API_KEY=${WEATHER_API_KEY}
+    depends_on:
+      - redis
+
+volumes:
+  pgdata:

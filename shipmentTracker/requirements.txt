@@ -1,0 +1,22 @@
+django
+requests
+
+# Postgres connector
+psycopg2-binary
+
+# Django WSGI
+gunicorn
+
+# Celery job distirbuter
+celery 
+django-celery-beat
+
+# Django Rest Framework
+djangorestframework
+markdown
+django-filter
+
+# Handling .env files
+python-dotenv
+
+redis
