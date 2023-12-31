@@ -42,7 +42,7 @@ services:
     build: ./shipmentTracker
     command: celery -A shipmentTracker worker -l info
     volumes:
-      - ./interviewProject:/app/
+      - ./shipmentTracker:/app/
     environment:
       - DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
       - DJANGO_DEBUG=${DJANGO_DEBUG}
@@ -60,7 +60,7 @@ services:
     build: ./shipmentTracker
     command: celery -A shipmentTracker beat -l info
     volumes:
-      - ./interviewProject:/app/
+      - ./shipmentTracker:/app/
     environment:
       - DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
       - DJANGO_DEBUG=${DJANGO_DEBUG}
