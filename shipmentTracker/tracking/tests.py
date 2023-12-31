@@ -78,7 +78,6 @@ class TestViews(TestCase):
         )
         expected_data =  [
             {
-                "id": 1,
                 "tracking_number": "TN987654",
                 "carrier": "test-carrier",
                 "sender_address": "Street 2, Mashhad, Iran",
@@ -90,7 +89,6 @@ class TestViews(TestCase):
                 "status": "DL"
             },
             {
-                "id": 2,
                 "tracking_number": "TN9876543",
                 "carrier": "test-carrier",
                 "sender_address": "Street 3, Mashhad, Iran",
@@ -102,7 +100,6 @@ class TestViews(TestCase):
                 "status": "IT"
             },
             {
-                "id": 3,
                 "tracking_number": "TN9876543",
                 "carrier": "test-carrier",
                 "sender_address": "Street 3, Mashhad, Iran",
