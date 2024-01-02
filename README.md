@@ -39,8 +39,8 @@ One of the required parts of the project is to limit the number of request to th
 
 The picture below, illustrates the architecture of this application. Notice that there is only one Redis server in our project.
 
-<div style="background-color: white; padding: 10px; border-radius: 8px;">
-<img src="images/architecture.png">
+<div >
+<img src="images/architecture.jpg">
 </div>
 
 <br>
