@@ -94,6 +94,7 @@ There are several factors to apply to our system to eliminate botthenecks in ord
 ## API Endpoints
 Users can access the list of shipments by a GET request to the `/shipment/` endpoint and also by sending a POST request containing two parameters, `tracking_number` and `carrier`, in the body of the request to this endpoint.
 
-* **GET**  - `/shipment/`
-* **POST** - `/shipment/`
+* **GET**  - `/shipment/` - Access the list of all the shipments.
+* **POST** - `/shipment/` - Check the status of a single shipment using the tracking number and the carrier.
   * The body must include the `tracking_number` and the `carrier`
+
